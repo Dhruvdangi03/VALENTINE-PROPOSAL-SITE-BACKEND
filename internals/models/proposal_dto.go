@@ -1,8 +1,8 @@
 package models
 
 type ProposalDTO struct {
-	Email   string `json:"Email" binding:"required,email"`
-	Sender  string `json:"Sender" binding:"required"`
-	Reciver string `json:"Reciver" binding:"required"`
-	Message string `json:"Message" binding:"required"`
+	Email    string `json:"email" binding:"required,email"`
+	Sender   string `json:"sender" binding:"required"`
+	Receiver string `json:"receiver" binding:"required"`
+	Message  string `json:"message" binding:"required"`
 }
