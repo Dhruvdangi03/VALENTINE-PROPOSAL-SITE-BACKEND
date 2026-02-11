@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const HOSTURL = "http://localhost:8080"
+const HOSTURL = "http://localhost:8080/"
 
 type URLHandler struct {
 	service *service.PropsalService
@@ -20,27 +20,23 @@ func NewURLHandler(s *service.PropsalService) *URLHandler {
 }
 
 func (h *URLHandler) CreateURL(c *gin.Context) {
-	var body struct {
-		Proposal models.ProposalDTO `json:"proposal"`
-	}
+	var req models.ProposalDTO
 
-	if err := c.BindJSON(&body); err != nil {
-		fmt.Println("Bind Error:", err)
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
+	if err := c.ShouldBindJSON(&req); err != nil {
+		fmt.Println("❌ Bind error:", err.Error())
+
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
 		return
 	}
 
-	fmt.Println("Received:", body.Proposal)
+	fmt.Println("✅ Request received:", req)
 
-	if body.Proposal.Email == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "email required"})
-		return
-	}
+	link := h.service.CreateURL(req)
 
-	url := h.service.CreateURL(body.Proposal)
-
-	c.JSON(http.StatusOK, gin.H{
-		"url": HOSTURL + "/" + url,
+	c.JSON(200, gin.H{
+		"link": HOSTURL + link,
 	})
 }
 
