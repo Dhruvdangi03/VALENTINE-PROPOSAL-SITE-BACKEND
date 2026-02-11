@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch VALENTINE-PROPOSAL-SITE-BACKEND Server",
+      "name": "Launch Valentine-Proposal-Site-Backend Server",
       "type": "go",
       "request": "launch",
       "mode": "auto",
