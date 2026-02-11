@@ -1,8 +1,8 @@
 package models
 
 type ProposalDTO struct {
-	Email   string `gorm:"type:text;not null"`
-	Sender  string `gorm:"type:text;not null"`
-	Reciver string `gorm:"type:text;not null"`
-	Message string `gorm:"type:text;not null"`
+	Email   string `json:"Email" binding:"required,email"`
+	Sender  string `json:"Sender" binding:"required"`
+	Reciver string `json:"Reciver" binding:"required"`
+	Message string `json:"Message" binding:"required"`
 }
