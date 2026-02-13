@@ -19,3 +19,11 @@ func GenerateShortCode() (string, error) {
 	}
 	return string(b), nil
 }
+
+type NotFoundError struct {
+	Message string
+}
+
+func (e *NotFoundError) Error() string {
+	return e.Message
+}

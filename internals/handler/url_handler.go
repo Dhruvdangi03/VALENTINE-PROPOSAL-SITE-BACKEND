@@ -53,3 +53,23 @@ func (h *URLHandler) GetProposalData(c *gin.Context) {
 		"data": data,
 	})
 }
+
+func (h *URLHandler) SaveResponse(c *gin.Context) {
+	code := c.Param("code")
+	var req struct {
+		Response string `json:"response" binding:"required"`
+	}
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	err := h.service.UpdateResponse(code, req.Response)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Proposal not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Response saved successfully"})
+}

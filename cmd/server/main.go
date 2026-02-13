@@ -27,6 +27,7 @@ func main() {
 
 	r.POST("/", urlHandler.CreateURL)
 	r.GET("/:code", urlHandler.GetProposalData)
+	r.POST("/:code/response", urlHandler.SaveResponse)
 
 	r.Run(":8080")
 }

@@ -8,6 +8,7 @@ type Proposal struct {
 	Sender      string    `json:"Sender" binding:"required"`
 	Receiver    string    `json:"Receiver" binding:"required"`
 	Message     string    `json:"Message" binding:"required"`
+	Response    string    `json:"Response"` // "yes" or "no" or empty
 	CreatedTime time.Time `gorm:"autoCreateTime"`
 	ExpiryTime  time.Time
 	Count       int64 `gorm:"default:0"`
