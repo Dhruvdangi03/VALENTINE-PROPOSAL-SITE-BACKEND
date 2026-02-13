@@ -34,3 +34,14 @@ func (p *PropsalService) GetProposal(short string) (models.ProposalDTO, bool) {
 
 	return proposal, true
 }
+
+func (p *PropsalService) UpdateResponse(short string, response string) error {
+	proposal, ok := p.store.Get(short)
+	if !ok {
+		return &util.NotFoundError{Message: "Proposal not found"}
+	}
+
+	proposal.Response = response
+	p.store.Save(short, proposal)
+	return nil
+}
